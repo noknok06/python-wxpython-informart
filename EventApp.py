@@ -7,6 +7,7 @@ import configparser
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from time import sleep
 
 infomart_file = "informart_list.xlsx"
@@ -91,14 +92,14 @@ class CEventApp(MyApp.MainFrame):
 
         # ログオン処理
         # ID/PW入力
-        driver.find_element_by_name('UID').send_keys(id)
-        driver.find_element_by_name('PWD').send_keys(pw)
+        driver.find_element(By.NAME, 'UID').send_keys(id)
+        driver.find_element(By.NAME, 'PWD').send_keys(pw)
 
-        driver.find_element_by_name('Logon').click()
+        driver.find_element(By.NAME, 'Logon').click()
 
         sleep(5)
         # トップページ
-        driver.find_element_by_class_name('mym-u-tanka').click()
+        driver.find_element(By.CLASS_NAME, 'mym-u-tanka').click()
 
         wx.MessageBox('得意先選択後、okボタンを押して続行してください。')
 
@@ -111,16 +112,16 @@ class CEventApp(MyApp.MainFrame):
             id_xpath = '//*[@id="item_private_code' + str(i) + '"]'
             pw_xpath = '//*[@id="prod_lot_price' + str(i) + '"]'
 
-            driver.find_element_by_xpath(id_xpath).send_keys(
+            driver.find_element(By.XPATH, id_xpath).send_keys(
                 self.grid_disp.GetCellValue(i, 0))
-            driver.find_element_by_xpath(pw_xpath).send_keys(
+            driver.find_element(By.XPATH, pw_xpath).send_keys(
                 self.grid_disp.GetCellValue(i, 1))
 
 
 # 設定ファイルクラス
 class Config():
     
-    def InitialConfig(self):
+    def InitialConfig():
 
         config = configparser.RawConfigParser()
 

@@ -3,3 +3,9 @@ __pycache__/MyApp.cpython-39.pyc
 config.ini
 informart_list.xlsx
 ~$informart_list.xlsx
+icon.png
+__pycache__/
+build/
+env/
+Main.spec
+dist/
