@@ -1,5 +1,6 @@
 import MyApp
 import os
+import wx
 import openpyxl
 import configparser
 
@@ -40,7 +41,7 @@ class CEventApp(MyApp.MainFrame):
             id = Config.ReadConfig("USER", "id")
             pw = Config.ReadConfig("USER", "pw")
             self.text_ctrl_id.SetValue(id)
-            self.text_ctrl_id.SetValue(pw)
+            self.text_ctrl_pw.SetValue(pw)
         else:
             Config.InitialConfig()  # 設定ファイル作成
 
@@ -54,6 +55,8 @@ class CEventApp(MyApp.MainFrame):
         for cells in tuple(ws.rows):
             col = 0
             for cell in cells:
+                if cell.value == "":
+                    break
                 if row == 0:
                     continue
                 elif row > 10:
@@ -63,7 +66,6 @@ class CEventApp(MyApp.MainFrame):
                 self.grid_disp.SetCellValue(
                     int(row)-1, int(col), str(cell.value))
                 col = col + 1
-                event.Skip()
 
             row = row + 1
 
@@ -98,9 +100,14 @@ class CEventApp(MyApp.MainFrame):
         # トップページ
         driver.find_element_by_class_name('mym-u-tanka').click()
 
+        wx.MessageBox('得意先選択後、okボタンを押して続行してください。')
+
         # 転記
         row = self.grid_disp.NumberRows
         for i in range(0, row):
+            if "" == self.grid_disp.GetCellValue(i, 0):
+                break
+
             id_xpath = '//*[@id="item_private_code' + str(i) + '"]'
             pw_xpath = '//*[@id="prod_lot_price' + str(i) + '"]'
 
