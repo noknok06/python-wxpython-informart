@@ -127,7 +127,7 @@ class Config():
         config = configparser.RawConfigParser()
 
         section1 = 'USER'
-        config.add_argument('--headless')
+        # config.add_argument('--headless')
         config.add_section(section1)
         config.set(section1, 'id', '')
         config.set(section1, 'pw', '')
