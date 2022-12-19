@@ -74,3 +74,30 @@ class MainFrame(wx.Frame):
 
     def OnExec(self, event):  # wxGlade: MainFrame.<event_handler>
         event.Skip()
+
+
+class SubFrame(wx.Frame):
+    def __init__(self, *args, **kwds):
+        # begin wxGlade: SubFrame.__init__
+        kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_FRAME_STYLE
+        wx.Frame.__init__(self, *args, **kwds)
+        self.SetSize((400, 300))
+        self.SetTitle("frame")
+
+        self.panel_main = wx.Panel(self, wx.ID_ANY)
+
+        sizer_main = wx.BoxSizer(wx.VERTICAL)
+
+        self.list_box_main = wx.ListBox(self.panel_main, wx.ID_ANY, choices=["choice 1"])
+        sizer_main.Add(self.list_box_main, 1, wx.ALL | wx.EXPAND, 0)
+
+        self.panel_main.SetSizer(sizer_main)
+
+        self.Layout()
+
+        self.Bind(wx.EVT_LISTBOX, self.ClickList, self.list_box_main)
+        # end wxGlade
+
+    def ClickList(self, event):  # wxGlade: SubFrame.<event_handler>
+        print("Event handler 'ClickList' not implemented!")
+        event.Skip()

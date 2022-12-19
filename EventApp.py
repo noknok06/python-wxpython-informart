@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
 
+import EventApp
 
 infomart_file = "informart_list.xlsx"
 config_file = os.getcwd() + "/config.ini"
@@ -71,6 +72,12 @@ class CEventApp(MyApp.MainFrame):
 
             row = row + 1
 
+
+        Csea = EventApp.CSubEventApp
+        frame = Csea(None)
+        frame.Show(True)
+
+
     def OnExec(self, event):  # wxGlade: MainFrame.<event_handler>
         print("Event handler 'OnExec' not implemented!")
 
@@ -118,6 +125,15 @@ class CEventApp(MyApp.MainFrame):
             driver.find_element(By.XPATH, pw_xpath).send_keys(
                 self.grid_disp.GetCellValue(i, 1))
 
+
+class CSubEventApp(MyApp.SubFrame):
+
+    def __init__(self, parent):
+        MyApp.SubFrame.__init__(self, parent)
+
+    def ClickList(self, event):  # wxGlade: SubFrame.<event_handler>
+        print("Event handler 'ClickList' not implemented!")
+        event.Skip()
 
 # 設定ファイルクラス
 class Config():
