@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
 
+
 infomart_file = "informart_list.xlsx"
 config_file = os.getcwd() + "/config.ini"
 
@@ -60,7 +61,7 @@ class CEventApp(MyApp.MainFrame):
                     break
                 if row == 0:
                     continue
-                elif row > 10:
+                elif row > self.grid_disp.NumberRows:
                     self.grid_disp.AppendRows(1)
 
                 # print(cell.value)
@@ -126,6 +127,7 @@ class Config():
         config = configparser.RawConfigParser()
 
         section1 = 'USER'
+        config.add_argument('--headless')
         config.add_section(section1)
         config.set(section1, 'id', '')
         config.set(section1, 'pw', '')
