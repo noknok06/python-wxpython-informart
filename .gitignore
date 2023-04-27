@@ -9,3 +9,4 @@ build/
 env/
 Main.spec
 dist/
+*.spec
